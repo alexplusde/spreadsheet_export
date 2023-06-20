@@ -1,4 +1,4 @@
-# Spreadsheet Export - REDAXO 5 Addon für PHPSpreadsheet
+# Spreadsheet Export - REDAXO 5 Addon für PHP_XLSXWriter
 
 Stellt Tabellen als XLSX-Export zur Verfügung.
 
