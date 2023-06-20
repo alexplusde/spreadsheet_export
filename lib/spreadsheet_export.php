@@ -9,8 +9,6 @@ class spreadsheet_export
             array_unshift($data, array_keys($data[0]));
         }
 
-        rex_file::put(rex_path::addonCache('spreadsheet_export', 'output.xlsx'), "");
-          
         $writer = new XLSXWriter();
         $writer->writeSheet($data);
 
@@ -18,7 +16,12 @@ class spreadsheet_export
         exit;
     }
 
-    public static function writeTable($table, $path) {
+    public static function writeTable($table, $path = null) {
+
+
+        if(!$path) {
+            rex_path::addonData('spreadsheet_export', $table.'.xlsx');
+        }
         
         $data = rex_sql::factory()->getArray('SELECT * FROM '. $table);
         if(count($data)) {
