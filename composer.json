@@ -1,4 +1,12 @@
 {
+  "require": {
+    "phpoffice/phpspreadsheet": "^1.28"
+  },
+  "config": {
+      "platform": {
+          "php": "7.4"
+      }
+  },
   "require-dev": {
     "redaxo/php-cs-fixer-config": "^2.0",
     "friendsofphp/php-cs-fixer": "^3.14"
