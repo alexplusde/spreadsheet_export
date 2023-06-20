@@ -1,5 +1,5 @@
 package: spreadsheet_export
-version: '0.0.1-dev'
+version: '1.0.0'
 author: 'Alexander Walther'
 supportpage: https://github.com/alexplusde/spreadsheet_export
 
@@ -14,33 +14,6 @@ requires:
 page:
     hidden: true
 
-#pages:
-#    spreadsheet_export:
-#        title: translate:spreadsheet_export_title#
-#
-#        block: system
-#        prio: 15
-#        icon: rex-icon fa-calendar
-#        perm: spreadsheet_export[]
-#
-
 installer_ignore:
   - .git
   - .github
-  - node_modules
-  - tests
-  - tests_output
-  - .editorconfig
-  - .eslintrc.js
-  - .gitignore
-  - .stylelintrc.js
-  - composer.json
-  - composer.lock
-  - nightwatch.conf.js
-  - package.json
-  - package-lock.json
-  - yarn.lock
-  - phpcs.xml
-  - phpunit.xml
-  - resources
-  - .php-cs-fixer.dist.php
