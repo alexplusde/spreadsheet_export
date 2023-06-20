@@ -1,30 +1,35 @@
 <?php
 
-
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Helper\Downloader;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
 class spreadsheet_export
 {
-    public static function sql() {
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
+    public static function sendTable($table) {
+        
+        $data = rex_sql::factory()->getArray('SELECT * FROM '. $table);
+        if(count($data)) {
+            array_unshift($data, array_keys($data[0]));
+        }
 
+        rex_file::put(rex_path::addonCache('spreadsheet_export', 'output.xlsx'), "");
+          
+        $writer = new XLSXWriter();
+        $writer->writeSheet($data);
 
-        $array = rex_sql::factory()->getArray("SELECT id, name FROM rex_article");
+        rex_response::sendResource($writer->writeToString(), "application/vnd.ms-excel", time(),  null, 'attachment', "output.xlsx");
+        exit;
+    }
 
+    public static function writeTable($table, $path) {
+        
+        $data = rex_sql::factory()->getArray('SELECT * FROM '. $table);
+        if(count($data)) {
+            array_unshift($data, array_keys($data[0]));
+        }
 
-        $header = array("id", "name");
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->fromArray([$header], $array, 'A1');
-
-        // Dateinamen für die Excel-Datei generieren
-        $filename = 'export.xlsx';
-
-        // Excel-Datei speichern
-        $writer = new Xlsx($spreadsheet);
-        dd($writer);
+        rex_file::put($path);
+          
+        $writer = new XLSXWriter();
+        $writer->writeSheet($data);
+        $writer->writeToFile($path);
+        return;
     }
 }
